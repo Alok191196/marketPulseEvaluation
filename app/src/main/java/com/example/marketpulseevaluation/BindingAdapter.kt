@@ -47,9 +47,14 @@ fun bindFormatText(textView: TextView, criteria: Criteria?) {
     if (criteria != null) {
     if (criteria.text.contains("$1")) {
             if(criteria.variable?.`$1`?.studyType == null) {
-                criteria.text = criteria.text.replace("$1", " (" + criteria.variable?.`$1`?.values?.get(0).toString() + ") ")
+                criteria.text = criteria.text.replace("$1",
+                    """ (${criteria.variable?.`$1`?.values?.get(0).toString()}) """
+                )
             } else {
-                criteria.text = criteria.text.replace("$1", "(" +criteria.variable?.`$1`?.defaultValue.toString() + ") ")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$1",
+                    newValue = """(${criteria.variable?.`$1`?.defaultValue.toString()}) """
+                )
 
             }
             textView.text = criteria.text
@@ -57,27 +62,45 @@ fun bindFormatText(textView: TextView, criteria: Criteria?) {
 
         if (criteria.text.contains("$2")) {
             if(criteria.variable?.`$2`?.studyType == null) {
-                criteria.text = criteria.text.replace("$2", "(" + criteria.variable?.`$2`?.values?.get(0).toString() + ") ")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$2",
+                    newValue = "(" + criteria.variable?.`$2`?.values?.get(0).toString() + ") "
+                )
             } else {
-                criteria.text = criteria.text.replace("$2", "(" +criteria.variable?.`$2`?.defaultValue.toString() + ") ")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$2",
+                    newValue = """(${criteria.variable?.`$2`?.defaultValue.toString()}) """
+                )
             }
             textView.text = criteria.text
         }
 
         if (criteria.text.contains("$3")) {
             if(criteria.variable?.`$3`?.studyType == null) {
-                criteria.text = criteria.text.replace("$3", "(" + criteria.variable?.`$3`?.values?.get(0).toString() + ")")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$3",
+                    newValue = """(${criteria.variable?.`$3`?.values?.get(0).toString()})"""
+                )
             } else {
-                criteria.text = criteria.text.replace("$3", "(" +criteria.variable?.`$3`?.defaultValue.toString() + ")")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$3",
+                    newValue = """(${criteria.variable?.`$3`?.defaultValue.toString()})"""
+                )
             }
             textView.text = criteria.text
         }
 
         if (criteria.text.contains("$4")) {
             if(criteria.variable?.`$4`?.studyType == null) {
-                criteria.text = criteria.text.replace("$4", "(" + criteria.variable?.`$4`?.values?.get(0).toString() + ")")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$4",
+                    newValue = """(${criteria.variable?.`$4`?.values?.get(0).toString()})"""
+                )
             } else {
-                criteria.text = criteria.text.replace("$4", "(" +criteria.variable?.`$4`?.defaultValue.toString() + ")")
+                criteria.text = criteria.text.replace(
+                    oldValue = "$4",
+                    newValue = """(${criteria.variable?.`$4`?.defaultValue.toString()})"""
+                )
             }
             textView.text = criteria.text
         }
