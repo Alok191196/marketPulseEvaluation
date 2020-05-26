@@ -6,13 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marketpulseevaluation.databinding.CriteraListItemBinding
-import com.example.marketpulseevaluation.detail.DetailViewModel
 import com.example.marketpulseevaluation.model.Criteria
 import com.example.marketpulseevaluation.ui.main.MainFragment
 
-class CriteriaDataAdapter :
+class CriteriaDataAdapter(val onClickListener: OnClickListener) :
     ListAdapter<Criteria, CriteriaDataAdapter.CriteriaViewHolder>(DiffCallback) {
-
 
     class CriteriaViewHolder(private var binding: CriteraListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -30,6 +28,9 @@ class CriteriaDataAdapter :
 
     override fun onBindViewHolder(holder: CriteriaViewHolder, position: Int) {
         val criteria = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(criteria)
+        }
         holder.bind(criteria)
     }
 
@@ -43,6 +44,10 @@ class CriteriaDataAdapter :
             return true
         }
 
+    }
+
+    class OnClickListener(val clickListener: (criteria: Criteria) -> Unit) {
+        fun onClick(criteria: Criteria) = clickListener(criteria)
     }
 
 }

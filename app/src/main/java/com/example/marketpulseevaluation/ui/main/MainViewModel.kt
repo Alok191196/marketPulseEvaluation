@@ -1,6 +1,5 @@
 package com.example.marketpulseevaluation.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class MainViewModel : ViewModel() {
 
@@ -36,7 +34,6 @@ class MainViewModel : ViewModel() {
             val getStockResponseDeferred = StockApi.retrofitService.getStocks()
             try {
                 val stockResponse = getStockResponseDeferred.await()
-                Log.i("MainViewModel", stockResponse.get(0).name)
 
                 _stockApiStatus.value = "Success"
                 _stockApiResponse.value = stockResponse

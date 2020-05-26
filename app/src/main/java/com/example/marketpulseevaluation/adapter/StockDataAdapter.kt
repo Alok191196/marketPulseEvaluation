@@ -45,8 +45,6 @@ class StockDataAdapter(val onClickListener: OnClickListener) :
         }
         holder.bind(stock)
     }
-
-
     class OnClickListener(val clickListener: (stock: Stock) -> Unit) {
         fun onClick(stock: Stock) = clickListener(stock)
 

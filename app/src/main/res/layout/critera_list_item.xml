@@ -38,6 +38,7 @@
             android:text="@string/and"
             android:padding="@dimen/space_8dps"
             android:layout_margin="@dimen/space_8dps"
+            android:clickable="false"
             android:gravity="start"
             app:setVisibility="@{criteria.text.equalsIgnoreCase(stock.criteria.get(stock.criteria.size() - 1).text) ? false : true}"
             android:textColor="@color/white"

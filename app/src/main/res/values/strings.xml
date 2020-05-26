@@ -3,4 +3,6 @@
     <string name="bullet"> \u25CF %1$s</string>
     <string name="green">green</string>
     <string name="and">and</string>
+    <string name="set_parameter">Set Parameter</string>
+    <string name="period">Period</string>
 </resources>

@@ -1,11 +1,19 @@
 package com.example.marketpulseevaluation
 
+import android.R
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.text.InputType
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,13 +55,81 @@ fun bindClickableSpan(textView: TextView, criteria: Criteria?) {
         val openBracketPosition = findIndex(spannableString, "(")
         val closeBracketPosition = findIndex(spannableString, ")")
         val size = openBracketPosition.size
-        if(openBracketPosition.isNotEmpty()) {
-            for(pos in 0 until size) {
-                spannableString.setSpan(object : ClickableSpan() {
-                    override fun onClick(widget: View) {
-                        Log.e("Binding", "clicked")
-                    }
-                }, openBracketPosition[pos], closeBracketPosition[pos] + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        if (openBracketPosition.isNotEmpty()) {
+            for (pos in 0 until size) {
+                spannableString.setSpan(
+                    object : ClickableSpan() {
+                        override fun onClick(widget: View) {
+                            if (criteria.variable?.`$1`?.studyType != null) {
+                                showAlert(criteria.variable?.`$1`?.defaultValue, widget.context)
+                            } else {
+                                if (criteria.variable?.`$1`?.values != null) {
+                                    showList(criteria.variable?.`$1`?.values, widget.context)
+                                }
+                            }
+
+                            if (criteria.variable?.`$2`?.studyType != null) {
+                                showAlert(criteria.variable?.`$2`?.defaultValue, widget.context)
+                            } else {
+                                if (criteria.variable?.`$2`?.values != null) {
+                                    showList(criteria.variable?.`$2`?.values, widget.context)
+                                }
+                            }
+
+                            if (criteria.variable?.`$3`?.studyType != null) {
+                                showAlert(criteria.variable?.`$3`?.defaultValue, widget.context)
+                            } else {
+                                if (criteria.variable?.`$3`?.values != null) {
+                                    showList(criteria.variable?.`$3`?.values, widget.context)
+                                }
+                            }
+
+                            if (criteria.variable?.`$4`?.studyType != null) {
+                                showAlert(criteria.variable?.`$4`?.defaultValue, widget.context)
+                            } else {
+                                if (criteria.variable?.`$1`?.values != null) {
+                                    showList(criteria.variable?.`$4`?.values, widget.context)
+                                }
+                            }
+                        }
+
+                        private fun showList(values: List<Double>?, context: Context?) {
+                            val alertDialogBuilder = AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK)
+                            val array: Array<String> =
+                                values?.map { it.toString() }!!.toTypedArray()
+                            alertDialogBuilder.setItems(array) { dialog, which ->
+
+                            }
+                            val dialog = alertDialogBuilder.create()
+
+                            dialog.show()
+                        }
+
+                        private fun showAlert(
+                            defaultValue: Int?,
+                            context: Context
+                        ) {
+                            val alertDialogBuilder = AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK)
+                                .setTitle(context.getString(com.example.marketpulseevaluation.R.string.set_parameter))
+                                .setMessage(context.getString(com.example.marketpulseevaluation.R.string.period))
+                            val editText = EditText(context)
+                            val lp = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                            )
+                            editText.layoutParams = lp
+                            editText.hint = defaultValue.toString()
+                            editText.setHintTextColor(Color.WHITE)
+                            editText.setTextColor(Color.WHITE)
+                            editText.inputType = InputType.TYPE_CLASS_NUMBER
+                            alertDialogBuilder.setView(editText)
+                            alertDialogBuilder.show()
+                        }
+                    },
+                    openBracketPosition[pos],
+                    closeBracketPosition[pos] + 1,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
 
             }
         }
@@ -135,8 +211,8 @@ fun bindFormatText(textView: TextView, criteria: Criteria?) {
 fun findIndex(str: SpannableString, subStr: String): List<Int> {
     var positionList = ArrayList<Int>()
     var size = str.length.minus(subStr.length)
-    for(char in 0..size.minus(1)) {
-        if(str.substring(char, char.plus(subStr.length)) == subStr) {
+    for (char in 0..size.minus(1)) {
+        if (str.substring(char, char.plus(subStr.length)) == subStr) {
             positionList.add(char)
         }
     }

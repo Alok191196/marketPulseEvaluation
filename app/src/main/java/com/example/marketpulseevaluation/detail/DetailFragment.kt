@@ -11,7 +11,7 @@ import com.example.marketpulseevaluation.databinding.FragmentDetailBinding
 import com.example.marketpulseevaluation.model.Stock
 import com.example.marketpulseevaluation.ui.main.MainFragment
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,8 @@ class DetailFragment : Fragment() {
         binding.viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(DetailViewModel::class.java)
 
-        binding.criteriaList.adapter = CriteriaDataAdapter()
+        binding.criteriaList.adapter = CriteriaDataAdapter(CriteriaDataAdapter.OnClickListener{
+        })
         return binding.root
     }
 }
