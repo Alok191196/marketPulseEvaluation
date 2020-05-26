@@ -26,7 +26,8 @@
             android:textSize="@dimen/text_size_16sp"
             android:text="@{criteria.text}"
             app:formatText="@{criteria}"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
+            app:clickableSpan="@{criteria}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
