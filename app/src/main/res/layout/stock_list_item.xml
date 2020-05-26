@@ -52,7 +52,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/space_4dps"
                 android:background="@color/black"
                 android:layerType="software"
                 android:paddingStart="@dimen/space_16dps"

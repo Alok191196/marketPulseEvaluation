@@ -30,8 +30,7 @@ class DetailFragment : Fragment(){
         binding.viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(DetailViewModel::class.java)
 
-        binding.criteriaList.adapter = CriteriaDataAdapter(CriteriaDataAdapter.OnClickListener{
-        })
+        binding.criteriaList.adapter = CriteriaDataAdapter()
         return binding.root
     }
 }

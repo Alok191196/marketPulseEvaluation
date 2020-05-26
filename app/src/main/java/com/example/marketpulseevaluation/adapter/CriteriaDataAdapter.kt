@@ -9,7 +9,7 @@ import com.example.marketpulseevaluation.databinding.CriteraListItemBinding
 import com.example.marketpulseevaluation.model.Criteria
 import com.example.marketpulseevaluation.ui.main.MainFragment
 
-class CriteriaDataAdapter(val onClickListener: OnClickListener) :
+class CriteriaDataAdapter :
     ListAdapter<Criteria, CriteriaDataAdapter.CriteriaViewHolder>(DiffCallback) {
 
     class CriteriaViewHolder(private var binding: CriteraListItemBinding) :
@@ -28,9 +28,6 @@ class CriteriaDataAdapter(val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: CriteriaViewHolder, position: Int) {
         val criteria = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(criteria)
-        }
         holder.bind(criteria)
     }
 
@@ -45,9 +42,4 @@ class CriteriaDataAdapter(val onClickListener: OnClickListener) :
         }
 
     }
-
-    class OnClickListener(val clickListener: (criteria: Criteria) -> Unit) {
-        fun onClick(criteria: Criteria) = clickListener(criteria)
-    }
-
 }
